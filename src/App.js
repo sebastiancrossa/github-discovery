@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
 
+// Component imports
+import Navbar from './components/layout/Navbar';
+import Users from './components/users/Users';
+
 class App extends Component {
   render() {
-    return <div className='App'>Github discovery</div>;
+    return (
+      <div className='App'>
+        <Navbar />
+
+        <div className='container'>
+          <Users />
+        </div>
+      </div>
+    );
   }
 }
 
