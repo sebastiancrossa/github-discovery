@@ -1,12 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+
+import GithubContext from '../../context/github/githubContext';
 
 // Component imports
 import Spinner from '../layout/Spinner';
 import Repos from '../repos/Repos';
 
-const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
+const User = ({ match }) => {
+  const githubContext = useContext(GithubContext);
+  const { getUser, getUserRepos, repos, loading, user } = githubContext;
+
   /* With useEffect we tell React what we want to perform after render (similar to componentDidMount) */
   useEffect(() => {
     getUser(match.params.login);
@@ -105,14 +109,6 @@ const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
       <Repos repos={repos} />
     </>
   );
-};
-
-User.propTypes = {
-  loading: PropTypes.bool,
-  user: PropTypes.object.isRequired,
-  repos: PropTypes.array.isRequired,
-  getUser: PropTypes.func.isRequired,
-  getUserRepos: PropTypes.func.isRequired
 };
 
 export default User;
